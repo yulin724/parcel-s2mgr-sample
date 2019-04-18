@@ -1,113 +1,91 @@
 <template>
-<div style="padding:15px;">
-  <!--  -->
-  <!--  -->
-  <!-- Gateway IP地址 -->
-  <div v-if="!mqtt.connected"
-       class="pure-form">
-    <fieldset>
-      <legend>Gateway Setting:</legend>
-      <input type="text"
-             style="width:100%;"
-             v-model="gw.uid"
-             placeholder="uid">
-      <input type="text"
-             style="width:100%;"
-             v-model="mqtt.host">
-      <button @click="mqttConnect"
-              class="pure-button button-success">{{mqtt.connected?'Connected':'Connect'}}</button>
-    </fieldset>
-    <hr/>
-  </div>
-  <!--  -->
-  <!--  -->
-  <!-- 功能界面UI -->
-  <div style="padding:5px;">
-    <button class="pure-button button-error"
-            @click="openDialog('ResetDialog')">Reset</button>
-  </div>
-  <div style="padding:5px;">
-    <button class="pure-button button-warning"
-            @click="openDialog('ClassicInclusionDialog')">Abort</button>
-  </div>
-  <div style="padding:5px;">
-    <button class="pure-button button-secondary"
-            @click="openDialog('ClassicInclusionDialog')">Classic Include</button>
-  </div>
-  <div style="padding:5px;">
-    <button class="pure-button button-secondary"
-            @click="openDialog">Smart Include with QRCode (InDev)</button>
-  </div>
-  <div style="padding:5px;">
-    <button class="pure-button button-secondary"
-            @click="openDialog('ExclusionDialog')">Exclude</button>
-  </div>
-  <div style="padding:5px;">
-    <button class="pure-button button-secondary"
-            @click="openDialog('RemoveFailedNodeDialog')">Remove Failed Node</button>
-  </div>
-  <div style="padding:5px;">
-    <button class="pure-button button-secondary"
-            @click="openDialog('ReplaceFailedNodeDialog')">Replace Failed Node (In Dev)</button>
-  </div>
-  <div style="padding:5px;">
-    <button class="pure-button button-secondary"
-            @click="openDialog">Learn Mode (InDev)</button>
-  </div>
-  <div style="padding:5px;">
-    <button class="pure-button button-secondary"
-            @click="openDialog('UpdateNetworkDialog')">Update Network</button>
-  </div>
-  <div style="padding:5px;">
-    <button class="pure-button button-secondary"
-            @click="openDialog">Backup & Restore(InDev)</button>
-  </div>
-  <div style="padding:5px;">
-    <button class="pure-button button-secondary"
-            @click="openDialog">Configuration(InDev)</button>
-  </div>
-  <div style="padding:5px;">
-    <button class="pure-button button-secondary"
-            @click="openDialog">Group Assocation(InDev)</button>
-  </div>
-  <div style="padding:5px;">
-    <button class="pure-button button-secondary"
-            @click="openDialog">Device OTA (InDev)</button>
-  </div>
-  <modal name="ResetDialog">
-    <div class="dialogLayout">
-      <ResetNetworkPage :uid="this.gw.uid" />
+  <div style="padding:15px;">
+    <!--  -->
+    <!--  -->
+    <!-- Gateway IP地址 -->
+    <div v-if="!mqtt.connected" class="pure-form">
+      <fieldset>
+        <legend>Gateway Setting:</legend>
+        <input type="text" style="width:100%;" v-model="gw.uid" placeholder="uid">
+        <input type="text" style="width:100%;" v-model="mqtt.host">
+        <button @click="mqttConnect" class="pure-button button-success">{{mqtt.connected?'Connected':'Connect'}}</button>
+      </fieldset>
+      <hr />
     </div>
-  </modal>
-  <modal name="ClassicInclusionDialog">
-    <div class="dialogLayout">
-      <ClassicInclusionPage :uid="this.gw.uid" />
+    <!--  -->
+    <!--  -->
+    <!-- 功能界面UI -->
+    <div style="padding:5px;">
+      <button class="pure-button button-error" @click="openDialog('ResetDialog')">Reset</button>
     </div>
-  </modal>
-  <modal name="ExclusionDialog">
-    <div class="dialogLayout">
-      <ExclusionPage :uid="this.gw.uid" />
+    <div style="padding:5px;">
+      <button class="pure-button button-warning" @click="openDialog('ClassicInclusionDialog')">Abort</button>
     </div>
-  </modal>
-  <modal name="RemoveFailedNodeDialog">
-    <div class="dialogLayout">
-      <RemoveFailedNodePage :uid="this.gw.uid" />
+    <div style="padding:5px;">
+      <button class="pure-button button-secondary" @click="openDialog('ClassicInclusionDialog')">Classic Include</button>
     </div>
-  </modal>
-  <modal name="ReplaceFailedNodeDialog">
-    <div class="dialogLayout">
-      <ReplaceFailedNodePage :uid="this.gw.uid" />
+    <div style="padding:5px;">
+      <button class="pure-button button-secondary" @click="openDialog">Smart Include with QRCode (InDev)</button>
     </div>
-  </modal>
-  <modal name="UpdateNetworkDialog">
-    <div class="dialogLayout">
-      <UpdateNetworkPage :uid="this.gw.uid" />
+    <div style="padding:5px;">
+      <button class="pure-button button-secondary" @click="openDialog('ExclusionDialog')">Exclude</button>
     </div>
-  </modal>
-</div>
-
+    <div style="padding:5px;">
+      <button class="pure-button button-secondary" @click="openDialog('RemoveFailedNodeDialog')">Remove Failed Node</button>
+    </div>
+    <div style="padding:5px;">
+      <button class="pure-button button-secondary" @click="openDialog('ReplaceFailedNodeDialog')">Replace Failed Node (In Dev)</button>
+    </div>
+    <div style="padding:5px;">
+      <button class="pure-button button-secondary" @click="openDialog">Learn Mode (InDev)</button>
+    </div>
+    <div style="padding:5px;">
+      <button class="pure-button button-secondary" @click="openDialog('UpdateNetworkDialog')">Update Network</button>
+    </div>
+    <div style="padding:5px;">
+      <button class="pure-button button-secondary" @click="openDialog">Backup & Restore(InDev)</button>
+    </div>
+    <div style="padding:5px;">
+      <button class="pure-button button-secondary" @click="openDialog">Configuration(InDev)</button>
+    </div>
+    <div style="padding:5px;">
+      <button class="pure-button button-secondary" @click="openDialog">Group Assocation(InDev)</button>
+    </div>
+    <div style="padding:5px;">
+      <button class="pure-button button-secondary" @click="openDialog">Device OTA (InDev)</button>
+    </div>
+    <modal name="ResetDialog">
+      <div class="dialogLayout">
+        <ResetNetworkPage :uid="this.gw.uid" />
+      </div>
+    </modal>
+    <modal name="ClassicInclusionDialog">
+      <div class="dialogLayout">
+        <ClassicInclusionPage :uid="this.gw.uid" />
+      </div>
+    </modal>
+    <modal name="ExclusionDialog">
+      <div class="dialogLayout">
+        <ExclusionPage :uid="this.gw.uid" />
+      </div>
+    </modal>
+    <modal name="RemoveFailedNodeDialog">
+      <div class="dialogLayout">
+        <RemoveFailedNodePage :uid="this.gw.uid" />
+      </div>
+    </modal>
+    <modal name="ReplaceFailedNodeDialog">
+      <div class="dialogLayout">
+        <ReplaceFailedNodePage :uid="this.gw.uid" />
+      </div>
+    </modal>
+    <modal name="UpdateNetworkDialog">
+      <div class="dialogLayout">
+        <UpdateNetworkPage :uid="this.gw.uid" />
+      </div>
+    </modal>
+  </div>
 </template>
-
 <script>
 import mqtt from 'mqtt'
 import ResetNetworkPage from './ResetNetworkPage'
@@ -143,10 +121,10 @@ export default {
         debug: false
       },
       gw: {
-        uid: 'SWK65YGRHK373TUB111A'
+        uid: localStorage.getItem('uid') || 'SWK65YGRHK373TUB111A'
       },
       mqtt: {
-        host: '192.168.2.106',
+        host: localStorage.getItem('ip') || '192.168.2.106',
         port: 9001,
         client: null,
         connected: false,
@@ -185,6 +163,10 @@ export default {
     },
     mqttConnect() {
       app.log('1. MQTT Connect')
+
+      localStorage.setItem('uid', this.gw.uid)
+      localStorage.setItem('ip', this.mqtt.host)
+
       this.mqtt.options.username = 'app' + this.gw.uid
       this.mqtt.options.password = Buffer.from('app' + this.gw.uid)
 
@@ -267,9 +249,7 @@ export default {
     })
   }
 }
-
 </script>
-
 <style scoped="">
 .dialogLayout {
   padding: 15px;
